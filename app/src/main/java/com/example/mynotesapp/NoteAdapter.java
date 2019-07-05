@@ -10,20 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.mynotesapp.entity.Note;
+
 import java.util.ArrayList;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder> {
 
     public ArrayList<Note> getListNotes() {
         return listNotes;
-    }
-
-    public void setListNotes(ArrayList<Note> listNotes) {
-        if (listNotes.size() > 0) {
-            this.listNotes.clear();
-        }
-        this.listNotes.addAll(listNotes);
-        notifyDataSetChanged();
     }
 
     private ArrayList<Note> listNotes = new ArrayList<>();
@@ -60,6 +54,14 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     @Override
     public int getItemCount() {
         return listNotes.size();
+    }
+
+    public void setListNotes(ArrayList<Note> notes) {
+        if (listNotes.size() > 0) {
+            this.listNotes.clear();
+        }
+        this.listNotes.addAll(listNotes);
+        notifyDataSetChanged();
     }
 
     public class NoteViewHolder extends RecyclerView.ViewHolder {

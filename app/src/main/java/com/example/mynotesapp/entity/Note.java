@@ -1,7 +1,14 @@
-package com.example.mynotesapp;
+package com.example.mynotesapp.entity;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.example.mynotesapp.db.DatabaseContract;
+
+import static android.provider.BaseColumns._ID;
+import static com.example.mynotesapp.db.DatabaseContract.getColumnInt;
+import static com.example.mynotesapp.db.DatabaseContract.getColumnString;
 
 public class Note implements Parcelable {
     private int id;
@@ -41,10 +48,12 @@ public class Note implements Parcelable {
         this.date = date;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
     }
+
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
@@ -55,9 +64,24 @@ public class Note implements Parcelable {
     }
 
     public Note() {
+
     }
 
-    protected Note(Parcel in) {
+    public Note(int id, String title, String description, String date) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.date = date;
+    }
+
+    public Note(Cursor cursor) {
+        this.id = getColumnInt(cursor, _ID);
+        this.title = getColumnString(cursor, DatabaseContract.NoteColumns.TITLE);
+        this.description = getColumnString(cursor, DatabaseContract.NoteColumns.DESCRIPTION);
+        this.date = getColumnString(cursor, DatabaseContract.NoteColumns.DATE);
+    }
+
+    private Note(Parcel in) {
         this.id = in.readInt();
         this.title = in.readString();
         this.description = in.readString();

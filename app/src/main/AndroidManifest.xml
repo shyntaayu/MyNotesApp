@@ -17,6 +17,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:authorities="com.dicoding.picodiploma.mynotesapp"
+            android:name=".provider.NoteProvider"
+            android:exported="true"
+            android:readPermission="com.dicoding.picodiploma.mynotesapp.READ_DATABASE"
+            android:writePermission="com.dicoding.picodiploma.mynotesapp.WRITE_DATABASE" />
     </application>
 
 </manifest>

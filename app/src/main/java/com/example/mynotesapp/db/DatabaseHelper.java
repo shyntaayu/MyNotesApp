@@ -5,7 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    public static String DATABASE_NAME = "dbnoteapp";
+
+    private static final String DATABASE_NAME = "dbnoteapp";
 
     private static final int DATABASE_VERSION = 1;
 
@@ -14,14 +15,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL)",
-            DatabaseContract.TABLE_NOTE,
+            DatabaseContract.NoteColumns.TABLE_NAME,
             DatabaseContract.NoteColumns._ID,
             DatabaseContract.NoteColumns.TITLE,
             DatabaseContract.NoteColumns.DESCRIPTION,
             DatabaseContract.NoteColumns.DATE
     );
 
-    public DatabaseHelper(Context context) {
+    DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -30,9 +31,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_TABLE_NOTE);
     }
 
+    /*
+    Method onUpgrade akan di panggil ketika terjadi perbedaan versi
+    Gunakan method onUpgrade untuk melakukan proses migrasi data
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.TABLE_NOTE);
+        /*
+        Drop table tidak dianjurkan ketika proses migrasi terjadi dikarenakan data user akan hilang,
+
+        Akan tetapi untuk mempermudah, maka drop table tetap dilakukan untuk menghindari error
+         */
+        db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.NoteColumns.TABLE_NAME);
         onCreate(db);
     }
 }
