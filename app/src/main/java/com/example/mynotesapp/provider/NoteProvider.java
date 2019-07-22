@@ -17,10 +17,9 @@ import static com.example.mynotesapp.db.DatabaseContract.NoteColumns.TABLE_NAME;
 import static java.security.AccessController.getContext;
 
 public class NoteProvider extends ContentProvider {
-
     /*
-    Integer digunakan sebagai identifier antara select all sama select by id
-     */
+        Integer digunakan sebagai identifier antara select all sama select by id
+         */
     private static final int NOTE = 1;
     private static final int NOTE_ID = 2;
 

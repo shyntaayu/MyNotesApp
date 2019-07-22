@@ -14,9 +14,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.example.mynotesapp.db.DatabaseContract;
 import com.example.mynotesapp.db.NoteHelper;
 import com.example.mynotesapp.entity.Note;
 
@@ -103,7 +105,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void postExecute(Cursor notes) {
         progressBar.setVisibility(View.INVISIBLE);
-
         ArrayList<Note> listNotes = mapCursorToArrayList(notes);
         if (listNotes.size() > 0) {
             adapter.setListNotes(listNotes);

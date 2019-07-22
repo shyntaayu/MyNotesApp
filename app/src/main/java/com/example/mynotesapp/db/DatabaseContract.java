@@ -7,8 +7,10 @@ import android.provider.BaseColumns;
 public final class DatabaseContract {
 
     // Authority yang digunakan
-    public static final String AUTHORITY = "com.dicoding.picodiploma.mynotesapp";
+    public static final String AUTHORITY = "com.example.mynotesapp";
     private static final String SCHEME = "content";
+    public static final String CONTENT_AUTHORITY = "com.example.mynotesapp";
+    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     //
     private DatabaseContract(){}
